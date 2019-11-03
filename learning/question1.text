@@ -1,0 +1,82 @@
+1.handler的意思
+2. Map<String, String[]> parameterMap = request.getParameterMap();
+3.HttpInterceptor抛异常时执行两次的原因?
+4.fastjson用法 JsonMapper ObjectMapper的使用
+5.启动多次的原因
+6.LevelFilter的作用?
+7.ThresholdFilter的作用?
+8.pom文件的版本号问题，箭头问题，redis等的版本问题?
+9.int类型还是Integer类型好?
+10.创建JedisPool使用不同的构造器
+11. boolean与Boolean类型?
+
+12.代码警告 Wrong tag 'param:' less... (Ctrl+F1)  This inspection points out the following javadoc comment flaws
+
+13. <scope>provided</scope> 作用域问题?
+
+14. <!--与fastxml.jsckson.core的比较-->
+           <!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl -->
+           <dependency>
+               <groupId>org.codehaus.jackson</groupId>
+               <artifactId>jackson-mapper-asl</artifactId>
+               <version>1.9.13</version>
+           </dependency>
+
+15.不同包下的StringUtils; JSON.toJavaObject(JSON.parseObject(str), clazz);
+
+16. 两种包的区别
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>20.0</version>
+        </dependency>
+        <!-- Jackson 两种包的区别-->
+        <!--<dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-guava</artifactId>
+            <version>2.5.3</version>
+        </dependency>-->
+
+17.@SuppressWarnings的用法与自动生成
+
+18.@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
+   @Retention(RUNTIME)
+   @Documented
+   @Constraint(validatedBy = {IsMobileValidator.class })
+
+19.public class LoginVo {
+
+   //    @NotNull
+       private String username;
+
+   //    @NotNull
+       @IsEmail
+       private String email;
+
+       @NotNull
+       @Length(min = 32)
+       private String password;
+   }
+
+20.字段用包装类型，方法返回值类型用基本类型?
+
+21.用与不用的区别 <!-- jsr303校验 -->
+                  <!-- <dependency>
+                       <groupId>org.springframework.boot</groupId>
+                       <artifactId>spring-boot-starter-validation</artifactId>
+                   </dependency>-->
+
+22.热部署<!-- jsr303校验 -->
+             <!-- <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-validation</artifactId>
+              </dependency>-->
+
+23.Object...  resultType与resultMap的用法 登录  parameterType与parameterMap的区别用法
+
+24.JSR3简化登录判断
+
+25.@Compent与@Service的区别
+
+26.注解问题@Retention(RetentionPolicy.RUNTIME)
+           @Target(ElementType.METHOD)

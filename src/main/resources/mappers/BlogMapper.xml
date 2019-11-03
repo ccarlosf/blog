@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccarlos.blog.dao.BlogMapper" >
+  <resultMap id="BaseResultMap" type="com.ccarlos.blog.model.Blog" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="blog_digest" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="label" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="read_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="comment_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="vote_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="category_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="user_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_message_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="update_message_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_message_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="update_message_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ccarlos.blog.model.BlogWithBLOBs" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="blog_digest" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="label" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="read_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="comment_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="vote_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="category_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="user_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_message_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="update_message_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_message_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="update_message_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="html_content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, blog_digest, label, read_count, comment_count, vote_count, category_id, 
+    user_id, create_message_id, update_message_id, create_message_type, update_message_type, 
+    create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    content, html_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from blog
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.ccarlos.blog.model.BlogWithBLOBs" >
+    insert into blog (id, title, blog_digest, 
+      label, read_count, comment_count, 
+      vote_count, category_id, user_id, 
+      create_message_id, update_message_id, create_message_type, 
+      update_message_type, create_time, update_time, 
+      content, html_content)
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{blogDigest,jdbcType=VARCHAR}, 
+      #{label,jdbcType=VARCHAR}, #{readCount,jdbcType=INTEGER}, #{commentCount,jdbcType=INTEGER}, 
+      #{voteCount,jdbcType=INTEGER}, #{categoryId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{createMessageId,jdbcType=VARCHAR}, #{updateMessageId,jdbcType=VARCHAR}, #{createMessageType,jdbcType=VARCHAR}, 
+      #{updateMessageType,jdbcType=VARCHAR}, now(), now(),
+      #{content,jdbcType=LONGVARCHAR}, #{htmlContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ccarlos.blog.model.BlogWithBLOBs" >
+    insert into blog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="blogDigest != null" >
+        blog_digest,
+      </if>
+      <if test="label != null" >
+        label,
+      </if>
+      <if test="readCount != null" >
+        read_count,
+      </if>
+      <if test="commentCount != null" >
+        comment_count,
+      </if>
+      <if test="voteCount != null" >
+        vote_count,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="createMessageId != null" >
+        create_message_id,
+      </if>
+      <if test="updateMessageId != null" >
+        update_message_id,
+      </if>
+      <if test="createMessageType != null" >
+        create_message_type,
+      </if>
+      <if test="updateMessageType != null" >
+        update_message_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="htmlContent != null" >
+        html_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="blogDigest != null" >
+        #{blogDigest,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null" >
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null" >
+        #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null" >
+        #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="voteCount != null" >
+        #{voteCount,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="createMessageId != null" >
+        #{createMessageId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateMessageId != null" >
+        #{updateMessageId,jdbcType=VARCHAR},
+      </if>
+      <if test="createMessageType != null" >
+        #{createMessageType,jdbcType=VARCHAR},
+      </if>
+      <if test="updateMessageType != null" >
+        #{updateMessageType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="htmlContent != null" >
+        #{htmlContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ccarlos.blog.model.BlogWithBLOBs" >
+    update blog
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="blogDigest != null" >
+        blog_digest = #{blogDigest,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null" >
+        label = #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null" >
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null" >
+        comment_count = #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="voteCount != null" >
+        vote_count = #{voteCount,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="createMessageId != null" >
+        create_message_id = #{createMessageId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateMessageId != null" >
+        update_message_id = #{updateMessageId,jdbcType=VARCHAR},
+      </if>
+      <if test="createMessageType != null" >
+        create_message_type = #{createMessageType,jdbcType=VARCHAR},
+      </if>
+      <if test="updateMessageType != null" >
+        update_message_type = #{updateMessageType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = now(),
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="htmlContent != null" >
+        html_content = #{htmlContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ccarlos.blog.model.BlogWithBLOBs" >
+    update blog
+    set title = #{title,jdbcType=VARCHAR},
+      blog_digest = #{blogDigest,jdbcType=VARCHAR},
+      label = #{label,jdbcType=VARCHAR},
+      read_count = #{readCount,jdbcType=INTEGER},
+      comment_count = #{commentCount,jdbcType=INTEGER},
+      vote_count = #{voteCount,jdbcType=INTEGER},
+      category_id = #{categoryId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      create_message_id = #{createMessageId,jdbcType=VARCHAR},
+      update_message_id = #{updateMessageId,jdbcType=VARCHAR},
+      create_message_type = #{createMessageType,jdbcType=VARCHAR},
+      update_message_type = #{updateMessageType,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR},
+      html_content = #{htmlContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ccarlos.blog.model.Blog" >
+    update blog
+    set title = #{title,jdbcType=VARCHAR},
+      blog_digest = #{blogDigest,jdbcType=VARCHAR},
+      label = #{label,jdbcType=VARCHAR},
+      read_count = #{readCount,jdbcType=INTEGER},
+      comment_count = #{commentCount,jdbcType=INTEGER},
+      vote_count = #{voteCount,jdbcType=INTEGER},
+      category_id = #{categoryId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      create_message_id = #{createMessageId,jdbcType=VARCHAR},
+      update_message_id = #{updateMessageId,jdbcType=VARCHAR},
+      create_message_type = #{createMessageType,jdbcType=VARCHAR},
+      update_message_type = #{updateMessageType,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!-- 更新博客相关的次数(阅读量、评论量、点赞量等) -->
+  <update id="updateBlogCount" parameterType="com.ccarlos.blog.model.BlogWithBLOBs">
+    UPDATE blog
+    <set>
+      <if test="readCount != null">
+        read_count = read_count + #{readCount},
+      </if>
+      <if test="commentCount != null">
+        comment_count = comment_count + #{commentCount},
+      </if>
+      <if test="voteCount != null">
+        vote_count = vote_count + #{voteCount},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+</mapper>

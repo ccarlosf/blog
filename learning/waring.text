@@ -1,0 +1,14 @@
+1.[WARNING] /D:/blog/blog/src/main/java/com/ccarlos/blog/common/JsonResponse.java: D:\blog\blog\src\main\java\com\ccarlos\blog\common\JsonResponse.java使用或覆盖了已过时的 API。
+2.[WARNING] /D:/blog/blog/src/main/java/com/ccarlos/blog/common/JsonResponse.java: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+
+3.[WARNING]
+  [WARNING] Some problems were encountered while building the effective settings
+  [WARNING] Unrecognised tag: 'snapshotPolicy' (position: START_TAG seen ...</layout>  \n        <snapshotPolicy>... @214:25)  @ D:\Project\taomall\apache-maven-3.2.3\conf\settings.xml, line 214, column 25
+  [WARNING] Unrecognised tag: 'snapshotPolicy' (position: START_TAG seen ...</layout>  \n        <snapshotPolicy>... @214:25)  @ D:\Project\taomall\apache-maven-3.2.3\conf\settings.xml, line 214, column 25
+  [WARNING]
+
+4.[WARNING]
+  [WARNING] Some problems were encountered while building the effective settings
+  [WARNING] Unrecognised tag: 'snapshotPolicy' (position: START_TAG seen ...</layout>  \n        <snapshotPolicy>... @214:25)  @ D:\Project\taomall\apache-maven-3.2.3\conf\settings.xml, line 214, column 25
+  [WARNING] Unrecognised tag: 'snapshotPolicy' (position: START_TAG seen ...</layout>  \n        <snapshotPolicy>... @214:25)  @ D:\Project\taomall\apache-maven-3.2.3\conf\settings.xml, line 214, column 25
+  [WARNING]

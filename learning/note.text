@@ -1,0 +1,40 @@
+1.HttpInterceptor拦截器
+https://blog.csdn.net/kiloyip/article/details/80044432
+https://www.cnblogs.com/EasonJim/p/7704740.html
+
+2.redis笔记
+http://www.cnblogs.com/benwu/articles/8616141.html
+https://www.cnblogs.com/rwxwsblog/p/5846752.html
+
+3.方法注释
+https://blog.csdn.net/xiaoliulang0324/article/details/79030752
+
+4.StringUtils
+https://www.cnblogs.com/yaya-yaya/p/6096539.html
+
+5.
+/**
+ * @description:
+ * @author: Created by ccarlos
+ * @date: ${DATE} ${TIME}
+ */
+
+6.
+*
+ * @description:
+ * @author: ccarlos
+ * @date: $date$ $time$
+ $params$
+ * @return: $return$
+ * @throws: $throws$
+ */
+
+
+ 7.
+ groovyScript("def result=''; def params=\"${_1}\".replaceAll('[\\\\[|\\\\]|\\\\s]', '').split(',').toList(); for(i = 0; i < params.size(); i++) {result+=' * @'+'param: ' + params[i] + ((i < params.size() - 1) ? '\\n'+'\\b' : '')}; return result", methodParameters())
+
+ 8.正则表达式 https://www.cnblogs.com/go4mi/p/6426215.html   https://www.cnblogs.com/stellar/p/5888163.html
+
+ 9.string.format用法 https://blog.csdn.net/anita9999/article/details/82346552
+
+ 10.redis缓存 https://blog.csdn.net/flashflight/article/details/51317016

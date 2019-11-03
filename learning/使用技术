@@ -1,0 +1,7 @@
+1.Spring Boot、MyBatis、Spring Data JPA
+2.消息队列：
+2.关系型数据库：MySQL
+3.非关系型数据库：Redis、MongoDB
+4.数据库连接池：Druid
+5.页面：Thymeleaf
+6.其它：MyBatis分页插件、fastjson、lombok、guava

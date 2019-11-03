@@ -1,0 +1,78 @@
+1.本地账号、第三方账号、个人信息的表拆分
+
+2.重构redisService  注册的时候应该生成token和cookike吧
+
+3.addCookie()，在本地账号服务与用户服务的改造
+
+4.项目中拦截器使用@Component还是@Service  工具类判断数组是否为空
+
+5.常量的提取 int Integer 基础类型与包装类型等的判空与相等
+
+6.项目无restart 热部署html 昵称唯一性判断 注册 成功 警告 错误三个等级提示 jsonResponse errormessage warningmessage
+
+7.登录时，服务端异常前端提示  密码参数校验异常
+
+8.页面取cookie值 springSecurity解决安全性问题
+
+9.用户列表敏感密码信息处理，Spring Security重构
+
+10.pageHelper异常处理 分页放最后写
+
+11.角色编码 用户id使用Integer还是Long 删除用真正物理删除吗，还是逻辑删除
+
+12.ResponseCode 成功、提示、警告、错误码等级修改
+
+13.删除用户时，用户关联的数据处理
+
+14.修改用户，前端数据传输不来
+
+15.用户管理、权限管理 登录后，右上角显示登录用户
+
+16.修改头像、修改数据等的权限控制
+
+17.ftp工具类改进，不要四不像  PropertiesUtil工具类写法
+
+18.上传文件时，以及修改数据时，权限session的判断
+
+19.ftp服务器配置重构
+
+20.数据安全验证
+
+21.UserArgumentResolver 方法改造
+
+22.隐藏mongoFileController，独立成一个项目
+
+23.修改个人设置有bug，逻辑要正常处理，密码处理
+
+24.User从redis中取 不从UserContext.getUserThreadLocal()取   Repository仓库
+
+25.按时间进行数据筛选过滤 BlogWIthBLOBs和Blog的改造
+
+26.添加用户时，同一用户添加同一分类的提示报错信息
+
+27.不同用户之间，数据安全权限 登录之后，才能执行响应的操作\
+
+28.获取修改分类页面,bug修改
+
+29.标签label加表，增加复杂性该造
+
+30.序列化与反序列化的原理
+
+31.Druid、Mybatis、RabbitMQ配置注释
+
+32.添加博客时的判空处理，不传JSON数据，使用@Valid
+
+33.RabbitMQ 添加博客，消息发送次数计算，同一事务中，先插再更新
+
+34.引入工具包
+<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.3</version>
+		</dependency>
+
+35.评论表增加blogId，减少博客评论关联表，简化程序
+
+36.评论服务、博客评论关系服务，拆开
+
+37.评论内容不能为空、权限的控制 评论删除按钮页面权限控制

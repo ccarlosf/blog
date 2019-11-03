@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccarlos.blog.dao.MenuMapper">
+    <resultMap id="BaseResultMap" type="com.ccarlos.blog.model.Menu">
+        <constructor>
+            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="menu_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="menu_url" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="creator" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="updater" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, menu_name, menu_url, status, creator, updater, create_time, update_time
+    </sql>
+
+    <!-- 查询所有的菜单信息 -->
+    <select id="selectAllMenu" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM menu
+    </select>
+
+    <!-- 插入一条菜单数据 -->
+    <insert id="insertMenu" parameterType="com.ccarlos.blog.model.Menu">
+        INSERT INTO menu
+        (id, menu_name, menu_url, status, creator, updater, create_time, update_time)
+        VALUES
+        (#{id}, #{menuName}, #{menuUrl}, #{status}, #{creator}, #{updater}, #{createTime}, #{updateTime})
+    </insert>
+</mapper>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccarlos.blog.dao.MessageLogMapper">
+    <resultMap id="BaseResultMap" type="com.ccarlos.blog.model.MessageLog">
+        <constructor>
+            <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="message_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="status" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="message_type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="mq_type" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="send_count" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="consume_count" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="try_count" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="next_retry_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.ccarlos.blog.model.MessageLog">
+        <constructor>
+            <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="message_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="status" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="message_type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="mq_type" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="send_count" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="consume_count" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="try_count" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="next_retry_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="message" jdbcType="LONGVARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, message_id, status, message_type, mq_type, send_count, consume_count, try_count, 
+    next_retry_time, create_time, update_time
+  </sql>
+    <sql id="Blob_Column_List">
+    message
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from message_log
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from message_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ccarlos.blog.model.MessageLog">
+    insert into message_log (id, message_id, status, 
+      message_type, mq_type, send_count, 
+      consume_count, try_count, next_retry_time, 
+      create_time, update_time, message
+      )
+    values (#{id,jdbcType=BIGINT}, #{messageId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{messageType,jdbcType=INTEGER}, #{mqType,jdbcType=VARCHAR}, #{sendCount,jdbcType=INTEGER}, 
+      #{consumeCount,jdbcType=INTEGER}, #{tryCount,jdbcType=INTEGER}, #{nextRetryTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{message,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ccarlos.blog.model.MessageLog">
+        insert into message_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="messageId != null">
+                message_id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="messageType != null">
+                message_type,
+            </if>
+            <if test="mqType != null">
+                mq_type,
+            </if>
+            <if test="sendCount != null">
+                send_count,
+            </if>
+            <if test="consumeCount != null">
+                consume_count,
+            </if>
+            <if test="tryCount != null">
+                try_count,
+            </if>
+            <if test="nextRetryTime != null">
+                next_retry_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="message != null">
+                message,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="messageId != null">
+                #{messageId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="messageType != null">
+                #{messageType,jdbcType=INTEGER},
+            </if>
+            <if test="mqType != null">
+                #{mqType,jdbcType=VARCHAR},
+            </if>
+            <if test="sendCount != null">
+                #{sendCount,jdbcType=INTEGER},
+            </if>
+            <if test="consumeCount != null">
+                #{consumeCount,jdbcType=INTEGER},
+            </if>
+            <if test="tryCount != null">
+                #{tryCount,jdbcType=INTEGER},
+            </if>
+            <if test="nextRetryTime != null">
+                #{nextRetryTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="message != null">
+                #{message,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ccarlos.blog.model.MessageLog">
+        update message_log
+        <set>
+            <if test="messageId != null">
+                message_id = #{messageId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="messageType != null">
+                message_type = #{messageType,jdbcType=INTEGER},
+            </if>
+            <if test="mqType != null">
+                mq_type = #{mqType,jdbcType=VARCHAR},
+            </if>
+            <if test="sendCount != null">
+                send_count = #{sendCount,jdbcType=INTEGER},
+            </if>
+            <if test="consumeCount != null">
+                consume_count = #{consumeCount,jdbcType=INTEGER},
+            </if>
+            <if test="tryCount != null">
+                try_count = #{tryCount,jdbcType=INTEGER},
+            </if>
+            <if test="nextRetryTime != null">
+                next_retry_time = #{nextRetryTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="message != null">
+                message = #{message,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ccarlos.blog.model.MessageLog">
+    update message_log
+    set message_id = #{messageId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      message_type = #{messageType,jdbcType=INTEGER},
+      mq_type = #{mqType,jdbcType=VARCHAR},
+      send_count = #{sendCount,jdbcType=INTEGER},
+      consume_count = #{consumeCount,jdbcType=INTEGER},
+      try_count = #{tryCount,jdbcType=INTEGER},
+      next_retry_time = #{nextRetryTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      message = #{message,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.ccarlos.blog.model.MessageLog">
+    update message_log
+    set message_id = #{messageId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      message_type = #{messageType,jdbcType=INTEGER},
+      mq_type = #{mqType,jdbcType=VARCHAR},
+      send_count = #{sendCount,jdbcType=INTEGER},
+      consume_count = #{consumeCount,jdbcType=INTEGER},
+      try_count = #{tryCount,jdbcType=INTEGER},
+      next_retry_time = #{nextRetryTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <update id="updateStatusByMessageId" parameterType="map">
+    UPDATE message_log
+    SET status =#{status}, update_time =#{updateTime}
+    WHERE message_id =#{messageId}
+  </update>
+
+    <!-- 根据消息状态和超时时间，查询超时的消息记录表 -->
+    <select id="selectTimeOutMessageListByStatus" parameterType="string" resultMap="ResultMapWithBLOBs">
+     SELECT
+      <include refid="Base_Column_List" />
+      ,
+      <include refid="Blob_Column_List" />
+      FROM message_log
+      WHERE status = #{status} AND next_retry_time &lt; sysdate()
+  </select>
+
+    <!-- 根据消息id重置消息次数+1 -->
+    <update id="updateMessageCount" parameterType="com.ccarlos.blog.model.MessageLog">
+        UPDATE message_log
+        <set>
+            <if test="sendCount != null">
+                send_count = send_count + #{sendCount},
+            </if>
+            <if test="consumeCount != null">
+                consume_count = consume_count + #{consumeCount},
+            </if>
+            <if test="tryCount != null">
+                try_count = try_count + #{tryCount},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="nextRetryTime != null">
+                next_retry_time = #{nextRetryTime},
+            </if>
+        </set>
+        WHERE message_id = #{messageId}
+    </update>
+
+    <!-- 根据消息id重置消息发送次数+1 -->
+<!--    <update id="updateSendCount">
+        UPDATE message_log
+        SET try_count = try_count + #{sendCount}, update_time = now()
+        WHERE message_id =#{messageId}
+    </update>-->
+
+</mapper>

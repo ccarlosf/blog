@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccarlos.blog.dao.CategoryMapper">
+    <resultMap id="BaseResultMap" type="com.ccarlos.blog.model.Category">
+        <constructor>
+            <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="category_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="user_id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, category_name, user_id, create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from category
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from category
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ccarlos.blog.model.Category">
+    insert into category (id, category_name, user_id, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{categoryName,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ccarlos.blog.model.Category">
+        insert into category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="categoryName != null">
+                category_name,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="categoryName != null">
+                #{categoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ccarlos.blog.model.Category">
+        update category
+        <set>
+            <if test="categoryName != null">
+                category_name = #{categoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ccarlos.blog.model.Category">
+    update category
+    set category_name = #{categoryName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!-- 根据用户Id、分类名查询分类数量 -->
+    <select id="checkCategoryNameByUserId" resultType="int" parameterType="map">
+    SELECT count(1) FROM category
+    WHERE category_name =#{categoryName} AND user_id =#{userId}
+  </select>
+
+    <!-- 根据用户Id、分类名查询分类数量 -->
+    <select id="selectCategoryListByUserId" resultMap="BaseResultMap" parameterType="map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM category
+        <where>
+            <if test="categoryName !=null and categoryName !=''">
+                AND category_name =#{categoryName}
+            </if>
+            <if test="userId !=null and userId !=''">
+                AND user_id =#{userId}
+            </if>
+        </where>
+    </select>
+   <!-- <select id="selectCategoryListByUserId" resultMap="BaseResultMap" parameterType="map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM category
+        WHERE category_name =#{categoryName} AND user_id =#{userId}
+    </select>-->
+</mapper>
